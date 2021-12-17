@@ -3,16 +3,20 @@ const inputLetterText = document.querySelector('#carta-texto');
 
 function createArray() {
     deleteChildrenOfP();
-    let inputText = inputLetterText.value;
-    let arrayLetterWords = inputText.split(' ');
-    arrayInMysteriousLetter(arrayLetterWords);
+    if (Math.abs(inputLetterText.value) === 0) {
+        document.querySelector('#carta-gerada').innerHTML = 'Por favor, digite o conteúdo da carta.';
+    } else {
+        let inputText = inputLetterText.value;
+        let arrayLetterWords = inputText.split(' ');
+        arrayInMysteriousLetter(arrayLetterWords);
+    }
 }
 
 function deleteChildrenOfP () {
     const p = document.querySelector('#carta-gerada');
-    if (p.children.length) {
-        for (let i = p.children.length -1; i >= 0; i -= 1) {
-            p.removeChild(p.children[i]);
+    if (p.childNodes.length) {
+        for (let i = p.childNodes.length -1; i >= 0; i -= 1) {
+            p.removeChild(p.childNodes[i]);
         }
     }
 
