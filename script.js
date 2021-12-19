@@ -1,5 +1,9 @@
 const buttonGenerateLetter = document.querySelector('#criar-carta');
 const inputLetterText = document.querySelector('#carta-texto');
+const styleGroup = [`newspaper`, `magazine1`, `magazine2`];
+const sizeGroup = [`medium`, `big`, `reallybig`];
+const rotationGroup = [`rotateleft`, `rotateright`];
+const slopeGroup = [`skewleft`, `skewright`];
 
 function createArray() {
     deleteChildrenOfP();
@@ -27,6 +31,14 @@ function arrayInMysteriousLetter(array) {
     const p = document.querySelector('#carta-gerada');
     for (let i = 0; i < array.length; i += 1) {
         const span = document.createElement('span');
+        span.classList.add(styleGroup[parseInt(Math.random()*styleGroup.length)])
+        span.classList.add(sizeGroup[parseInt(Math.random()*sizeGroup.length)])
+        if (parseInt(Math.random()*2)) {
+            span.classList.add(rotationGroup[parseInt(Math.random()*rotationGroup.length)])
+        }
+        if (parseInt(Math.random()*2)) {
+            span.classList.add(slopeGroup[parseInt(Math.random()*slopeGroup.length)])
+        }
         span.innerHTML = array[i];
         p.appendChild(span);
     }
