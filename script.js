@@ -5,9 +5,9 @@ const sizeGroup = ['medium', 'big', 'reallybig'];
 const rotationGroup = ['rotateleft', 'rotateright'];
 const slopeGroup = ['skewleft', 'skewright'];
 const wordCounter = document.querySelector('#carta-contador');
+const p = document.querySelector('#carta-gerada');
 
 function deleteChildrenOfP() {
-  const p = document.querySelector('#carta-gerada');
   if (p.childNodes.length) {
     for (let i = p.childNodes.length - 1; i >= 0; i -= 1) {
       p.removeChild(p.childNodes[i]);
@@ -36,7 +36,7 @@ function arrayInMysteriousLetter(array) {
     span.classList.add(slopeGroup[parseInt(Math.random() * slopeGroup.length, 10)]);
     // }
     span.innerHTML = array[i];
-    document.querySelector('#carta-gerada').appendChild(span);
+    p.appendChild(span);
   }
   wordCounter.innerHTML = array.length;
 }
@@ -44,7 +44,7 @@ function arrayInMysteriousLetter(array) {
 function createArray() {
   deleteChildrenOfP();
   if (Math.abs(inputLetterText.value) === 0) {
-    document.querySelector('#carta-gerada').innerHTML = 'Por favor, digite o conteúdo da carta.';
+    p.innerHTML = 'Por favor, digite o conteúdo da carta.';
   } else {
     const inputText = inputLetterText.value;
     const arrayLetterWords = inputText.split(' ');
