@@ -6,51 +6,50 @@ const rotationGroup = ['rotateleft', 'rotateright'];
 const slopeGroup = ['skewleft', 'skewright'];
 const wordCounter = document.querySelector('#carta-contador');
 
+function deleteChildrenOfP() {
+  const p = document.querySelector('#carta-gerada');
+  if (p.childNodes.length) {
+    for (let i = p.childNodes.length - 1; i >= 0; i -= 1) {
+      p.removeChild(p.childNodes[i]);
+    }
+  }
+}
+
+function newClassStyles(event) {
+  event.target.removeAttribute('class');
+  event.target.classList.add(styleGroup[parseInt(Math.random() * styleGroup.length, 10)]);
+  event.target.classList.add(sizeGroup[parseInt(Math.random() * sizeGroup.length, 10)]);
+  event.target.classList.add(rotationGroup[parseInt(Math.random() * rotationGroup.length, 10)]);
+  event.target.classList.add(slopeGroup[parseInt(Math.random() * slopeGroup.length, 10)]);
+}
+
+function arrayInMysteriousLetter(array) {
+  for (let i = 0; i < array.length; i += 1) {
+    const span = document.createElement('span');
+    span.addEventListener('click', newClassStyles);
+    span.classList.add(styleGroup[parseInt(Math.random() * styleGroup.length, 10)]);
+    span.classList.add(sizeGroup[parseInt(Math.random() * sizeGroup.length, 10)]);
+    // if (parseInt(Math.random()*2)) {
+    span.classList.add(rotationGroup[parseInt(Math.random() * rotationGroup.length, 10)]);
+    // }
+    // if (parseInt(Math.random()*2)) {
+    span.classList.add(slopeGroup[parseInt(Math.random() * slopeGroup.length, 10)]);
+    // }
+    span.innerHTML = array[i];
+    document.querySelector('#carta-gerada').appendChild(span);
+  }
+  wordCounter.innerHTML = array.length;
+}
+
 function createArray() {
   deleteChildrenOfP();
   if (Math.abs(inputLetterText.value) === 0) {
     document.querySelector('#carta-gerada').innerHTML = 'Por favor, digite o conteúdo da carta.';
   } else {
-    let inputText = inputLetterText.value;
-    let arrayLetterWords = inputText.split(' ');
+    const inputText = inputLetterText.value;
+    const arrayLetterWords = inputText.split(' ');
     arrayInMysteriousLetter(arrayLetterWords);
   }
-}
-
-function deleteChildrenOfP () {
-    const p = document.querySelector('#carta-gerada');
-    if (p.childNodes.length) {
-        for (let i = p.childNodes.length - 1; i >= 0; i -= 1) {
-            p.removeChild(p.childNodes[i]);
-        }
-    }
-}
-
-function arrayInMysteriousLetter(array) {
-    const p = document.querySelector('#carta-gerada');
-    for (let i = 0; i < array.length; i += 1) {
-        const span = document.createElement('span');
-        span.addEventListener('click', newClassStyles)
-        span.classList.add(styleGroup[parseInt(Math.random()*styleGroup.length)]);
-        span.classList.add(sizeGroup[parseInt(Math.random()*sizeGroup.length)]);
-        // if (parseInt(Math.random()*2)) {
-            span.classList.add(rotationGroup[parseInt(Math.random()*rotationGroup.length)]);
-        // }
-        // if (parseInt(Math.random()*2)) {
-            span.classList.add(slopeGroup[parseInt(Math.random()*slopeGroup.length)]);
-        // }
-        span.innerHTML = array[i];
-        p.appendChild(span);
-    }
-    wordCounter.innerHTML = array.length;
-}
-
-function newClassStyles(event) {
-    event.target.removeAttribute('class');
-    event.target.classList.add(styleGroup[parseInt(Math.random()*styleGroup.length)]);
-    event.target.classList.add(sizeGroup[parseInt(Math.random()*sizeGroup.length)]);
-    event.target.classList.add(rotationGroup[parseInt(Math.random()*rotationGroup.length)]);
-    event.target.classList.add(slopeGroup[parseInt(Math.random()*slopeGroup.length)]);
 }
 
 buttonGenerateLetter.addEventListener('click', createArray);
